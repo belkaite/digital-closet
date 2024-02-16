@@ -1,9 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <main>
-    <h1>Home</h1>
-  </main>
+  <div class="saved">
+    <h1>Saved</h1>
+  </div>
 </template>
 
 <style>
