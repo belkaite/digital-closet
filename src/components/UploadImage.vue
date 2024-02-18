@@ -1,26 +1,7 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
-import { storage } from '@/firebaseConfig';
-import { ref as storageRef, uploadBytes } from 'firebase/storage';
-import useFileSelect from './fileHandling';
+import useFileSelect from './useFileUpload';
 
-const { selectedFile, handleFileSelect } = useFileSelect();
-const state = reactive({ inputKey: 0, successMessage: '', errorMessage: '' });
-
-const uploadImage = async () => {
-  if (selectedFile.value) {
-    const imageRef = storageRef(storage, `images/${selectedFile.value.name}`);
-    console.log(selectedFile.value);
-    try {
-      await uploadBytes(imageRef, selectedFile.value);
-      selectedFile.value = null;
-      state.inputKey += 1;
-      state.successMessage = 'Upload successful!';
-    } catch (error) {
-      state.errorMessage = `Upload failed: ${error}`;
-    }
-  }
-};
+const { handleFileSelect, state, uploadImage } = useFileSelect();
 </script>
 
 <template>
