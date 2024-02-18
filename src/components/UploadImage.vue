@@ -1,32 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { getStorage, ref as firebaseStorageRef, uploadBytes } from 'firebase/storage';
+import { reactive } from 'vue';
+import { storage } from '@/firebaseConfig';
+import { ref as storageRef, uploadBytes } from 'firebase/storage';
+import useFileSelect from './fileHandling';
 
-
-const storage = getStorage();
-const selectedFile = ref<File | null>(null);
-
-
-const handleFileSelect = (event: Event) => {
-  const input = event.target as HTMLInputElement;
-  if (input.files) {
-    [selectedFile.value] = input.files;
-  }
-};
-
+const { selectedFile, handleFileSelect } = useFileSelect();
+const state = reactive({ inputKey: 0, successMessage: '', errorMessage: '' });
 
 const uploadImage = async () => {
   if (selectedFile.value) {
-    const imageRef = firebaseStorageRef(storage, `images/${selectedFile.value.name}`);
+    const imageRef = storageRef(storage, `images/${selectedFile.value.name}`);
+    console.log(selectedFile.value);
     try {
-      console.log('Starting upload...');
-      const snapshot = await uploadBytes(imageRef, selectedFile.value);
-      console.log('Upload successful!', snapshot);
+      await uploadBytes(imageRef, selectedFile.value);
+      selectedFile.value = null;
+      state.inputKey += 1;
+      state.successMessage = 'Upload successful!';
     } catch (error) {
-      console.error('Upload failed', error);
+      state.errorMessage = `Upload failed: ${error}`;
     }
-  } else {
-    console.log('No file selected');
   }
 };
 </script>
@@ -34,8 +26,16 @@ const uploadImage = async () => {
 <template>
   <div>
     <label for="fileInput">Upload Image</label>
-    <input type="file" id="fileInput" @change="handleFileSelect" />
+    <input
+      type="file"
+      accept=".jpg,.jpeg,.png"
+      id="fileInput"
+      :key="state.inputKey"
+      @change="handleFileSelect"
+    />
     <button type="button" @click="uploadImage">Upload Image</button>
+    <div v-if="state.successMessage">{{ state.successMessage }}</div>
+    <div v-if="state.errorMessage">{{ state.errorMessage }}</div>
   </div>
 </template>
 
