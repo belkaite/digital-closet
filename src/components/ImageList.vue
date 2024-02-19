@@ -1,47 +1,26 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
-import { getStorage, ref as firebaseRef, list, getDownloadURL } from 'firebase/storage';
+import { useImageStore } from '@/stores/imageStore';
+import { onMounted } from 'vue';
 
-const imagesListRef = firebaseRef(getStorage(), 'images');
-type ImageInfo = {
-  url: string;
-  name: string;
-};
+const store = useImageStore();
 
-const images = ref<ImageInfo[]>([]);
-const pageToken = ref<string | undefined>();
-const errorMessage = ref('');
+onMounted(store.fetchImages);
+// watchEffect(() => {
+//   store.fetchImages();
+// });
 
-const fetchImages = async () => {
-  try {
-    const result = await list(imagesListRef, { maxResults: 10, pageToken: pageToken.value });
-    const imagePromises = result.items.map(async (itemRef) => ({
-      url: await getDownloadURL(itemRef),
-      name: itemRef.name
-    }));
-    const fetchedImages = await Promise.all(imagePromises);
-    images.value.push(...fetchedImages);
-    pageToken.value = result.nextPageToken;
-  } catch (error) {
-    errorMessage.value = `Error fetching images: ${error}`;
-  }
-};
-
-const canFetchMore = computed(() => Boolean(pageToken.value));
-
-onMounted(fetchImages);
 </script>
 
 <template>
   <div>
     <h3>Uploaded images:</h3>
     <div class="image-grid">
-      <div v-for="(image, index) in images" :key="index">
+      <div v-for="(image, index) in store.images" :key="index">
         <img :src="image.url" :alt="image.name" class="uploaded-image" />
       </div>
     </div>
-    <div v-if="errorMessage"> {{ errorMessage }}</div>
-    <button type="button" v-if="canFetchMore" @click="fetchImages" class="load-more-button">
+    <div v-if="store.errorMessage">{{ store.errorMessage }}</div>
+    <button type="button" v-if="store.canFetchMore" @click="store.fetchImages" class="load-more-button">
       Load more
     </button>
   </div>

@@ -22,8 +22,13 @@ export default function useFileSelect() {
   const uploadImage = async () => {
     if (selectedFile.value) {
       const imageRef = storageRef(storage, `images/${selectedFile.value.name}`);
+      const metadata = {
+        customMetadata: {
+          uploadDate: Date.now().toString()
+        }
+      };
       try {
-        await uploadBytes(imageRef, selectedFile.value);
+        await uploadBytes(imageRef, selectedFile.value, metadata);
         selectedFile.value = null;
         state.inputKey += 1;
         state.successMessage = 'Upload successful!';
