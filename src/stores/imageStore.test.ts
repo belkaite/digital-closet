@@ -1,7 +1,12 @@
-import { it, expect, describe } from 'vitest';
-import useFileSelect from '../useFileUpload';
+import { it, expect, describe, beforeEach } from 'vitest';
+import { setActivePinia, createPinia } from 'pinia';
+import { useImageStore } from './imageStore';
 
-describe('fileSelect', () => {
+describe('Image Store', () => {
+  beforeEach(() => {
+    setActivePinia(createPinia());
+  });
+
   it('should update selectedFile on file input change', async () => {
     const file = new File([''], 'filename.jpg', { type: 'image/jpeg' });
     const event = {
@@ -10,10 +15,9 @@ describe('fileSelect', () => {
       }
     } as unknown as Event;
 
-    const { selectedFile, handleFileSelect } = useFileSelect();
-
-    handleFileSelect(event);
-    expect(selectedFile.value).toEqual(file);
+    const store = useImageStore();
+    store.handleFileSelect(event);
+    expect(store.selectedFile).toEqual(file);
   });
 
   it('should accept only ".jpg,.jpeg,.png" formats', async () => {
@@ -24,10 +28,9 @@ describe('fileSelect', () => {
       }
     } as unknown as Event;
 
-    const { selectedFile, handleFileSelect } = useFileSelect();
-
-    handleFileSelect(event);
-    expect(selectedFile.value).toBeTruthy();
+    const store = useImageStore();
+    store.handleFileSelect(event);
+    expect(store.selectedFile).toBeTruthy();
   });
 
   it('should show error when any other formats are uploaded', async () => {
@@ -38,9 +41,8 @@ describe('fileSelect', () => {
       }
     } as unknown as Event;
 
-    const { handleFileSelect, state } = useFileSelect();
-
-    handleFileSelect(event);
-    expect(state.errorMessage).toMatch(/invalid file type/i);
+    const store = useImageStore();
+    store.handleFileSelect(event);
+    expect(store.errorMessage).toMatch(/invalid file type/i);
   });
 });

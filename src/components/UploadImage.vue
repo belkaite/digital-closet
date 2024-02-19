@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import useFileSelect from './useFileUpload';
+import { useImageStore } from '@/stores/imageStore';
 
-const { handleFileSelect, state, uploadImage } = useFileSelect();
+const store = useImageStore();
+
 </script>
 
 <template>
@@ -11,12 +12,11 @@ const { handleFileSelect, state, uploadImage } = useFileSelect();
       type="file"
       accept=".jpg,.jpeg,.png"
       id="fileInput"
-      :key="state.inputKey"
-      @change="handleFileSelect"
+      @change="store.handleFileSelect"
     />
-    <button type="button" @click="uploadImage">Upload Image</button>
-    <div v-if="state.successMessage">{{ state.successMessage }}</div>
-    <div v-if="state.errorMessage">{{ state.errorMessage }}</div>
+    <button type="button" @click="store.uploadImage">Upload Image</button>
+    <div v-if="store.successMessage">{{ store.successMessage }}</div>
+    <div v-if="store.errorMessage">{{ store.errorMessage }}</div>
   </div>
 </template>
 
