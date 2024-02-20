@@ -1,8 +1,8 @@
 import { it, expect, describe, beforeEach } from 'vitest';
 import { setActivePinia, createPinia } from 'pinia';
-import { useImageStore } from './imageStore';
+import { useImageStore } from '../imageStore';
 
-describe('Image Store', () => {
+describe('handleFileSelect', () => {
   beforeEach(() => {
     setActivePinia(createPinia());
   });
@@ -17,6 +17,7 @@ describe('Image Store', () => {
 
     const store = useImageStore();
     store.handleFileSelect(event);
+
     expect(store.selectedFile).toEqual(file);
   });
 
@@ -30,6 +31,7 @@ describe('Image Store', () => {
 
     const store = useImageStore();
     store.handleFileSelect(event);
+
     expect(store.selectedFile).toBeTruthy();
   });
 
@@ -43,6 +45,9 @@ describe('Image Store', () => {
 
     const store = useImageStore();
     store.handleFileSelect(event);
+
     expect(store.errorMessage).toMatch(/invalid file type/i);
   });
 });
+
+
