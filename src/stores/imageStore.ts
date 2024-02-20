@@ -95,7 +95,8 @@ export const useImageStore = defineStore('images', () => {
     fetchImages,
     uploadImage,
     handleFileSelect,
-    canFetchMore
+    canFetchMore,
+    filterAndSortImages
   };
 });
 
