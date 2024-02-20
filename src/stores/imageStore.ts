@@ -7,7 +7,8 @@ import {
   uploadBytes,
   list,
   getDownloadURL,
-  getMetadata
+  getMetadata,
+  deleteObject
 } from 'firebase/storage';
 
 export const useImageStore = defineStore('images', () => {
@@ -86,6 +87,16 @@ export const useImageStore = defineStore('images', () => {
 
   const canFetchMore = computed(() => Boolean(pageToken.value));
 
+  const deleteImage = async (imageName: string) => {
+    try {
+      const imageToDeleteRef = storageRef(storage, `images/${imageName}`);
+      await deleteObject(imageToDeleteRef);
+      images.value = images.value.filter((image) => image.name !== imageName);
+    } catch (error) {
+      errorMessage.value = `Error deleting image: ${error}`;
+    }
+  };
+
   return {
     selectedFile,
     images,
@@ -96,7 +107,8 @@ export const useImageStore = defineStore('images', () => {
     uploadImage,
     handleFileSelect,
     canFetchMore,
-    filterAndSortImages
+    filterAndSortImages,
+    deleteImage
   };
 });
 

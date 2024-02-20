@@ -8,7 +8,7 @@ import ImageList from '../components/ImageList.vue'
     <h1>Upload</h1>
     <UploadImage />
     <br>
-    <ImageList />
+    <ImageList :showDelete="true" />
   </main>
 </template>
 

@@ -4,11 +4,17 @@ import { onMounted } from 'vue';
 
 const store = useImageStore();
 
+const props = defineProps({
+  showDelete: {
+    type: Boolean,
+    default: true
+  }
+});
+
 onMounted(store.fetchImages);
 // watchEffect(() => {
 //   store.fetchImages();
 // });
-
 </script>
 
 <template>
@@ -17,10 +23,16 @@ onMounted(store.fetchImages);
     <div class="image-grid">
       <div v-for="(image, index) in store.images" :key="index">
         <img :src="image.url" :alt="image.name" class="uploaded-image" />
+        <button type="button" v-if="props.showDelete" @click="store.deleteImage(image.name)">Delete</button>
       </div>
     </div>
     <div v-if="store.errorMessage">{{ store.errorMessage }}</div>
-    <button type="button" v-if="store.canFetchMore" @click="store.fetchImages" class="load-more-button">
+    <button
+      type="button"
+      v-if="store.canFetchMore"
+      @click="store.fetchImages"
+      class="load-more-button"
+    >
       Load more
     </button>
   </div>
