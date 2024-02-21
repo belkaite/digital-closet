@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import About from '../views/AboutView.vue';
 import Upload from '../views/UploadView.vue';
-import Create from '../views/CreateView.vue';
+import WishList from '../views/WishListView.vue';
 import Saved from '../views/SavedView.vue';
 
 const router = createRouter({
@@ -24,9 +24,9 @@ const router = createRouter({
       component: Upload
     },
     {
-      path: '/create',
-      name: 'create',
-      component: Create
+      path: '/wishlist',
+      name: 'wishlist',
+      component: WishList
     },
     {
       path: '/saved',
