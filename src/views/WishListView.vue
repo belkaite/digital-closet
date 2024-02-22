@@ -1,41 +1,18 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import WishItem from '@/components/WishItem.vue';
+import useWishListStore from '@/stores/wishItemsStore';
 
+const store = useWishListStore();
 
-const newItem = ref({ id: '', name: '', price: '', url: '' });
-
-const wishList = ref([
-  { id: '1', name: 'Cowboy boots', price: '100' },
-  { id: '2', name: 'Skirt', price: '50' }
-]);
+const newItem = ref({ name: '', price: '', url: '' });
 
 const addItem = () => {
-  const id = new Date().getTime().toString();
-  const creationDate = new Date().toISOString().substring(0, 10);
-  const item = {
-    id,
-    name: newItem.value.name,
-    price: newItem.value.price,
-    creationDate,
-    url: newItem.value.url
-  };
-  wishList.value.unshift(item);
-  newItem.value = { id: '', name: '', price: '', url: '' };
+  if (newItem.value.name && newItem.value.price) {
+    store.addItem({ ...newItem.value });
+    newItem.value = { name: '', price: '', url: '' };
+  }
 };
-
-const calculateItemsSum = computed(() => {
-  let sum = 0;
-  wishList.value.forEach((item) => {
-    sum += Number(item.price);
-  });
-  return sum;
-});
-
-const deleteItem = (id: string) => {
-  wishList.value = wishList.value.filter(item => { return item.id !== id})
-}
-
 </script>
 
 <template>
@@ -54,8 +31,8 @@ const deleteItem = (id: string) => {
       <label for="new-item-price">Price:</label>
       <input
         v-model="newItem.price"
+        type="number"
         ref="newItemRef"
-        type="text"
         id="new-item-title"
         placeholder="Price..."
       />
@@ -64,9 +41,14 @@ const deleteItem = (id: string) => {
       <button @click="addItem" :disabled="!newItem" type="button">Add Item</button>
     </div>
     <div>
-      <h2>Money to save: {{ calculateItemsSum }}</h2>
+      <h2>Money to save: {{ store.calculateItemsSum }}</h2>
     </div>
-    <WishItem v-for="item in wishList" :key="item.id" :item="item" @delete="deleteItem"></WishItem>
+    <WishItem
+      v-for="item in store.wishList"
+      :key="item.id"
+      :item="item"
+      @delete="store.deleteItem"
+    ></WishItem>
   </div>
 </template>
 
