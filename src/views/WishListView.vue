@@ -1,29 +1,46 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import WishItem from '@/components/WishItem.vue';
 
-const newItem = ref({ id: '', name: '', description: '' });
 
+const newItem = ref({ id: '', name: '', price: '', url: '' });
 
 const wishList = ref([
-  { id: '1', name: 'Cowboy boots', description: 'Here is the link:' },
-  { id: '2', name: 'Skirt', description: 'Here is the link:' }
+  { id: '1', name: 'Cowboy boots', price: '100' },
+  { id: '2', name: 'Skirt', price: '50' }
 ]);
 
 const addItem = () => {
   const id = new Date().getTime().toString();
+  const creationDate = new Date().toISOString().substring(0, 10);
   const item = {
     id,
     name: newItem.value.name,
-    description: newItem.value.description
+    price: newItem.value.price,
+    creationDate,
+    url: newItem.value.url
   };
   wishList.value.unshift(item);
-  newItem.value = { id: '', name: '', description: '' };
+  newItem.value = { id: '', name: '', price: '', url: '' };
 };
+
+const calculateItemsSum = computed(() => {
+  let sum = 0;
+  wishList.value.forEach((item) => {
+    sum += Number(item.price);
+  });
+  return sum;
+});
+
+const deleteItem = (id: string) => {
+  wishList.value = wishList.value.filter(item => { return item.id !== id})
+}
+
 </script>
 
 <template>
   <div class="create">
-    <h1>Create</h1>
+    <h1>WishList</h1>
     <div class="form">
       <h3>Add a new item</h3>
       <label for="new-item-title">Title:</label>
@@ -34,25 +51,22 @@ const addItem = () => {
         id="new-item-title"
         placeholder="Title..."
       />
-      <label for="description">Description:</label>
-      <textarea v-model="newItem.description" id="description" placeholder="Description..." />
+      <label for="new-item-price">Price:</label>
+      <input
+        v-model="newItem.price"
+        ref="newItemRef"
+        type="text"
+        id="new-item-title"
+        placeholder="Price..."
+      />
+      <label for="url">Url:</label>
+      <textarea v-model="newItem.url" id="url" placeholder="Url..." />
       <button @click="addItem" :disabled="!newItem" type="button">Add Item</button>
     </div>
-    <div v-for="item in wishList" :key="item.id">
-      <div class="listitem">
-        <h2>
-          {{ item.name }}
-        </h2>
-        <h2>
-          {{ item.description }}
-        </h2>
-        <br />
-        <br />
-        <button type="button">edit</button>
-        <br />
-        <button type="button">delete</button>
-      </div>
+    <div>
+      <h2>Money to save: {{ calculateItemsSum }}</h2>
     </div>
+    <WishItem v-for="item in wishList" :key="item.id" :item="item" @delete="deleteItem"></WishItem>
   </div>
 </template>
 
@@ -66,15 +80,5 @@ h1 {
   margin-bottom: 20px;
   background-color: whitesmoke;
   padding: 20px;
-}
-
-.listitem {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  background-color: navajowhite;
-  border-radius: 12px;
-  padding: 20px;
-  width: 200px;
-  position: relative;
 }
 </style>

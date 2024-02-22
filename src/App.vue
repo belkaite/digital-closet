@@ -10,8 +10,8 @@ import { RouterLink, RouterView } from 'vue-router';
     <nav class="navigation container-md">
       <RouterLink to="/" class="nav-link">Home</RouterLink>
       <RouterLink :to="{ name: 'about' }" class="nav-link">About</RouterLink>
-      <RouterLink :to="{ name: 'upload' }" class="nav-link">Upload</RouterLink>
       <RouterLink :to="{ name: 'wishlist' }" class="nav-link">Wish List</RouterLink>
+      <RouterLink :to="{ name: 'upload' }" class="nav-link">Upload</RouterLink>
       <RouterLink :to="{ name: 'saved' }" class="nav-link">Saved</RouterLink>
     </nav>
     <RouterView />
