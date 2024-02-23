@@ -1,24 +1,42 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import WishItem from '@/components/WishItem.vue';
 import useWishListStore from '@/stores/wishItemsStore';
+import ItemFilter from '@/components/ItemFilter.vue';
 
 const store = useWishListStore();
-
+const filter = ref('');
 
 const newItem = ref({ name: '', price: '', url: '' });
 
 const addItem = () => {
   if (newItem.value.name && newItem.value.price) {
-    store.addItem({ ...newItem.value });
+    store.addItem({ ...newItem.value, isPurchased: false });
     newItem.value = { name: '', price: '', url: '' };
   }
 };
+
+const setFilter = (value) => {
+  filter.value = value;
+};
+
+const filteredItems = computed(() => {
+  switch (filter.value) {
+    case 'to-purchase':
+      return store.wishList.filter((item) => !item.isPurchased);
+    case 'purchased':
+      return store.wishList.filter((item) => item.isPurchased);
+      default:
+        return store.wishList
+  }
+});
+
 </script>
 
 <template>
   <div class="create">
     <h1>WishList</h1>
+    <ItemFilter :filter="filter" @set-filter="setFilter" />
     <div class="form">
       <h3>Add a new item</h3>
       <label for="new-item-title">Title:</label>
@@ -44,11 +62,7 @@ const addItem = () => {
     <div>
       <h2>Money to save: {{ store.calculateItemsSum }}</h2>
     </div>
-    <WishItem
-      v-for="item in store.wishList"
-      :key="item.id"
-      :item="item"
-    ></WishItem>
+    <WishItem v-for="item in filteredItems" :key="item.id" :item="item"></WishItem>
   </div>
 </template>
 

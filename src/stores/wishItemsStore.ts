@@ -22,7 +22,7 @@ export const useWishListStore = defineStore('wishlist', () => {
       price: wishListItem.price,
       creationDate,
       url: wishListItem.url,
-      isPurchased: false
+      isPurchased: wishListItem.isPurchased
     };
     wishList.value.unshift(item);
   };
