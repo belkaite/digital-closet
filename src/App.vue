@@ -8,11 +8,31 @@ import { RouterLink, RouterView } from 'vue-router';
       <h1>Your digital closet</h1>
     </div>
     <nav class="navigation container-md">
-      <RouterLink to="/" class="nav-link">Home</RouterLink>
-      <RouterLink :to="{ name: 'about' }" class="nav-link">About</RouterLink>
-      <RouterLink :to="{ name: 'wishlist' }" class="nav-link">Wish List</RouterLink>
-      <RouterLink :to="{ name: 'upload' }" class="nav-link">Upload</RouterLink>
-      <RouterLink :to="{ name: 'saved' }" class="nav-link">Saved</RouterLink>
+      <RouterLink
+        to="/"
+        class="border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
+        >Home</RouterLink
+      >
+      <RouterLink
+        :to="{ name: 'about' }"
+        class="border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
+        >About</RouterLink
+      >
+      <RouterLink
+        :to="{ name: 'wishlist' }"
+        class="border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
+        >Wish List</RouterLink
+      >
+      <RouterLink
+        :to="{ name: 'upload' }"
+        class="border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
+        >Upload</RouterLink
+      >
+      <RouterLink
+        :to="{ name: 'saved' }"
+        class="border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
+        >Saved</RouterLink
+      >
     </nav>
     <RouterView />
   </div>

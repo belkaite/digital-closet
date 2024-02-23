@@ -1,14 +1,15 @@
-<script setup lang="ts">
-
-
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="modal" aria-modal="true" role="dialog" tabindex="-1">
     <div class="inner">
       <!-- <button type="button" class="close-btn" @click="closePopup">X</button> -->
       <slot></slot>
+      <img
+        src="@/assets/images/clothes-on-hanger.png"
+        alt="clothes on hanger"
+        class="object-fit rounded-xl h-80 md:h-64 md:rounded-l-xl transform hover:scale-105 hover:rounded-xl duration-200"
+      />
     </div>
   </div>
 </template>
@@ -28,7 +29,7 @@
 }
 
 .modal .inner {
-  background-color: #ffca85;
+  background-color: white;
   padding: 30px;
   border-radius: 12px;
   display: flex;

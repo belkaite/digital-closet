@@ -5,16 +5,11 @@
   font-weight: normal;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsl(160deg 100% 37% / 100%);
-  transition: 0.4s;
-  padding: 3px;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsl(160deg 100% 37% / 20%);
-  }
+body {
+  background-image: url('./images/curve.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  font-family: 'Open Sans', sans-serif;
 }
