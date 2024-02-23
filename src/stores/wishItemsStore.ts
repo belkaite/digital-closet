@@ -2,18 +2,16 @@ import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 
 export const useWishListStore = defineStore('wishlist', () => {
-  const wishList = ref([
-    { id: '1', name: 'Cowboy boots', price: '100' },
-    { id: '2', name: 'Skirt', price: '50' }
-  ]);
-
   type WishListItemType = {
     id: string;
     name: string;
     price: string;
     url: string;
     creationDate: string;
+    isPurchased: boolean;
   };
+
+  const wishList = ref<WishListItemType[]>([]);
 
   const addItem = (wishListItem: Omit<WishListItemType, 'id' | 'creationDate'>) => {
     const id = new Date().getTime().toString();
@@ -23,7 +21,8 @@ export const useWishListStore = defineStore('wishlist', () => {
       name: wishListItem.name,
       price: wishListItem.price,
       creationDate,
-      url: wishListItem.url
+      url: wishListItem.url,
+      isPurchased: false
     };
     wishList.value.unshift(item);
   };
@@ -36,11 +35,17 @@ export const useWishListStore = defineStore('wishlist', () => {
     wishList.value = wishList.value.filter((item) => item.id !== id);
   };
 
-
   const editItem = (editedItem: WishListItemType) => {
     const index = wishList.value.findIndex((i) => i.id === editedItem.id);
     if (index !== -1) {
       wishList.value[index] = { ...wishList.value[index], ...editedItem };
+    }
+  };
+
+  const togglePurchaseStatus = (id: string) => {
+    const index = wishList.value.findIndex((item) => item.id === id);
+    if (index !== -1) {
+      wishList.value[index].isPurchased = !wishList.value[index].isPurchased;
     }
   };
 
@@ -49,7 +54,8 @@ export const useWishListStore = defineStore('wishlist', () => {
     addItem,
     calculateItemsSum,
     deleteItem,
-    editItem
+    editItem,
+    togglePurchaseStatus
   };
 });
 

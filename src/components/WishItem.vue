@@ -3,7 +3,6 @@ import { defineProps, ref, reactive } from 'vue';
 import useWishListStore from '@/stores/wishItemsStore';
 import PopupModal from '@/components/PopupModal.vue';
 
-
 const modalActive = ref(false);
 const store = useWishListStore();
 
@@ -20,19 +19,15 @@ type WishListItemType = {
   price: string;
   url: string;
   creationDate: string;
+  isPurchased: boolean;
 };
 
 const editableItem = reactive({ ...props.item }) as WishListItemType;
-
 
 const submitEdit = () => {
   store.editItem(editableItem);
   modalActive.value = false;
 };
-
-
-
-
 </script>
 
 <template>
@@ -46,7 +41,18 @@ const submitEdit = () => {
     </div>
     <br />
     <div>{{ props.item.creationDate }}</div>
+    <input
+      type="checkbox"
+      :id="`item-${props.item.id}`"
+      :checked="props.item.isPurchased"
+      @change="store.togglePurchaseStatus(props.item.id)"
+    />
+    <label :for="`item-${props.item.id}`">
+      {{ props.item.isPurchased ? 'Purchased' : 'To purchase' }}
+    </label>
+    <br />
     <button @click="modalActive = true" type="button">edit</button>
+    <br />
     <button type="button" @click="store.deleteItem(props.item.id)">delete</button>
   </div>
   <PopupModal v-if="modalActive">
