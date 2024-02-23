@@ -17,6 +17,7 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@ashwamegh/vue-link-preview": "^3.3.0",
     "firebase": "^10.8.0",
     "pinia": "^2.1.7",
     "preview-link-js": "^2.1.2",

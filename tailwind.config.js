@@ -2,7 +2,9 @@
 export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
-    extend: {}
+    extend: {
+      'slow-spin': 'spin 3s linear infinite'
+    }
   },
   plugins: []
 };

@@ -8,12 +8,14 @@ export const useWishListStore = defineStore('wishlist', () => {
   ]);
 
   type WishListItemType = {
+    id: string;
     name: string;
     price: string;
     url: string;
+    creationDate: string;
   };
 
-  const addItem = (wishListItem: WishListItemType) => {
+  const addItem = (wishListItem: Omit<WishListItemType, 'id' | 'creationDate'>) => {
     const id = new Date().getTime().toString();
     const creationDate = new Date().toISOString().substring(0, 10);
     const item = {
@@ -34,11 +36,20 @@ export const useWishListStore = defineStore('wishlist', () => {
     wishList.value = wishList.value.filter((item) => item.id !== id);
   };
 
+
+  const editItem = (editedItem: WishListItemType) => {
+    const index = wishList.value.findIndex((i) => i.id === editedItem.id);
+    if (index !== -1) {
+      wishList.value[index] = { ...wishList.value[index], ...editedItem };
+    }
+  };
+
   return {
     wishList,
     addItem,
     calculateItemsSum,
-    deleteItem
+    deleteItem,
+    editItem
   };
 });
 

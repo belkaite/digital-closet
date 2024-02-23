@@ -1,4 +1,12 @@
 <script setup lang="ts">
+import { defineProps, ref, reactive } from 'vue';
+import useWishListStore from '@/stores/wishItemsStore';
+import PopupModal from '@/components/PopupModal.vue';
+
+
+const modalActive = ref(false);
+const store = useWishListStore();
+
 const props = defineProps({
   item: {
     type: Object,
@@ -6,11 +14,25 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['delete'])
+type WishListItemType = {
+  id: string;
+  name: string;
+  price: string;
+  url: string;
+  creationDate: string;
+};
 
-const handleDelete = () => {
- emit('delete', props.item.id)
-}
+const editableItem = reactive({ ...props.item }) as WishListItemType;
+
+
+const submitEdit = () => {
+  store.editItem(editableItem);
+  modalActive.value = false;
+};
+
+
+
+
 </script>
 
 <template>
@@ -24,11 +46,21 @@ const handleDelete = () => {
     </div>
     <br />
     <div>{{ props.item.creationDate }}</div>
-    <br />
-    <button type="button">edit</button>
-    <br />
-    <button type="button" @click="handleDelete">delete</button>
+    <button @click="modalActive = true" type="button">edit</button>
+    <button type="button" @click="store.deleteItem(props.item.id)">delete</button>
   </div>
+  <PopupModal v-if="modalActive">
+    <h3>Edit item:</h3>
+    <form @submit.prevent="submitEdit">
+      <label for="name">Name:</label>
+      <input type="text" id="name" v-model="editableItem.name" />
+      <label for="price">Price:</label>
+      <input type="number" id="price" v-model="editableItem.price" />
+      <label for="url">Url:</label>
+      <input type="text" id="url" v-model="editableItem.url" />
+      <button type="submit">Save changes</button>
+    </form>
+  </PopupModal>
 </template>
 
 <style>

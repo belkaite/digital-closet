@@ -5,6 +5,7 @@ import useWishListStore from '@/stores/wishItemsStore';
 
 const store = useWishListStore();
 
+
 const newItem = ref({ name: '', price: '', url: '' });
 
 const addItem = () => {
@@ -47,7 +48,6 @@ const addItem = () => {
       v-for="item in store.wishList"
       :key="item.id"
       :item="item"
-      @delete="store.deleteItem"
     ></WishItem>
   </div>
 </template>
