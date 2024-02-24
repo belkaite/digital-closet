@@ -3,9 +3,11 @@ import { ref, computed } from 'vue';
 import WishItem from '@/components/WishItem.vue';
 import useWishListStore from '@/stores/wishItemsStore';
 import ItemFilter from '@/components/ItemFilter.vue';
+import PopupModal from '@/components/PopupModal.vue';
 
 const store = useWishListStore();
 const filter = ref('');
+const modalActive = ref(false);
 
 const newItem = ref({ name: '', price: '', url: '' });
 
@@ -17,6 +19,7 @@ const addItem = () => {
   if (newItem.value.name && newItem.value.price) {
     store.addItem({ ...newItem.value, isPurchased: false });
     newItem.value = { name: '', price: '', url: '' };
+    modalActive.value = false;
   }
 };
 
@@ -50,46 +53,71 @@ const calculateItemsSumPurchased = computed(() => {
 
 <template>
   <div class="create">
-    <h1 class="dark:bg-darkBlue dark:text-white">WishList</h1>
-    <ItemFilter :filter="filter" @set-filter="setFilter" />
-    <div class="form">
-      <h3>Add a new item</h3>
-      <label for="new-item-title">Title:</label>
-      <input
-        v-model="newItem.name"
-        ref="newItemRef"
-        type="text"
-        id="new-item-title"
-        placeholder="Title..."
-      />
-      <label for="new-item-price">Price:</label>
-      <input
-        v-model="newItem.price"
-        type="number"
-        ref="newItemRef"
-        id="new-item-price"
-        placeholder="Price..."
-      />
-      <label for="url">Url:</label>
-      <textarea v-model="newItem.url" id="url" placeholder="Url..." />
-      <button @click="addItem" :disabled="!newItem" type="button">Add Item</button>
-    </div>
-    <div class="w-5 h-5 bg-amber-200 rounded-full hover:animate-ping"></div>
-    <div>
-      <h2>Money to save: {{ calculateItemsSumToPurchase }}</h2>
-      <h2>Money spent: {{ calculateItemsSumPurchased }}</h2>
+    <h1>Wish List / Your purchases planner</h1>
+    <ItemFilter :filter="filter" @set-filter="setFilter" class="filter" />
+    <button
+      @click="modalActive = true"
+      type="button"
+      class="bg-red-800 hover:bg-red-500 text-white mx-2 my-6 py-4 px-6 border text-5xl border-gray-400 rounded shadow"
+    >
+      +
+    </button>
+    <PopupModal v-if="modalActive">
+      <div class="form bg-neutral-100">
+        <h2>Add a new item:</h2>
+        <label for="new-item-title">Title:</label>
+        <input v-model="newItem.name" ref="newItemRef" type="text" id="new-item-title" />
+        <label for="new-item-price">Price:</label>
+        <input v-model="newItem.price" type="number" ref="newItemRef" id="new-item-price" />
+        <label for="url">Url:</label>
+        <textarea v-model="newItem.url" id="url" />
+        <button
+          @click="addItem"
+          :disabled="!newItem"
+          type="button"
+          class="mx-2 bg-red-800 hover:bg-red-500 text-white py-2 px-4 my-4 border border-gray-400 rounded shadow w-36"
+        >
+          Add Item
+        </button>
+        <button
+          type="button"
+          @click="modalActive = false"
+          class="mx-2 bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow w-36"
+        >
+          Close
+        </button>
+      </div>
+    </PopupModal>
+    <div class="money-calculator my-6">
+      <div class="flex items-center gap-2 ">
+        <div class="w-5 h-5 bg-red-600 rounded-full hover:animate-ping"></div>
+        <h2>Money to save: {{ calculateItemsSumToPurchase }} Eur</h2>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-5 h-5 bg-red-600 rounded-full hover:animate-ping"></div>
+        <h2>Money spent: {{ calculateItemsSumPurchased }} Eur</h2>
+      </div>
     </div>
     <WishItem v-for="item in filteredItems" :key="item.id" :item="item"></WishItem>
   </div>
 </template>
 
-<style>
-
-
+<style scoped>
 .form {
   margin-top: 20px;
   margin-bottom: 20px;
-  background-color: whitesmoke;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.filter {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 </style>

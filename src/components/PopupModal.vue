@@ -6,9 +6,9 @@
       <!-- <button type="button" class="close-btn" @click="closePopup">X</button> -->
       <slot></slot>
       <img
-        src="@/assets/images/clothes-on-hanger.png"
+        src="@/assets/images/clothing-items.png"
         alt="clothes on hanger"
-        class="object-fit rounded-xl h-80 md:h-64 md:rounded-l-xl transform hover:scale-105 hover:rounded-xl duration-200"
+        class="rounded-xl h-80 md:h-64 md:rounded-l-xl object-cover object-center transform hover:scale-105 hover:rounded-xl duration-200"
       />
     </div>
   </div>
