@@ -5,7 +5,7 @@ import ImageList from '../components/ImageList.vue'
 
 <template>
   <main>
-    <h1>Upload</h1>
+    <h1 class="dark:bg-darkBlue dark:text-white">Upload</h1>
     <UploadImage />
     <br>
     <ImageList :showDelete="true" />
@@ -13,7 +13,5 @@ import ImageList from '../components/ImageList.vue'
 </template>
 
 <style>
-h1 {
-  color: black;
-}
+/* This is a single-line comment */
 </style>

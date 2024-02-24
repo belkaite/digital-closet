@@ -31,7 +31,7 @@ const submitEdit = () => {
 </script>
 
 <template>
-  <div class="listitem">
+  <div class="border border-gray-200 shadow-md rounded-md">
     <h2>
       {{ props.item.name }}
     </h2>
@@ -74,7 +74,7 @@ h1 {
   color: black;
 }
 
-.listitem {
+/* .listitem {
   margin-top: 20px;
   margin-bottom: 20px;
   background-color: navajowhite;
@@ -83,7 +83,7 @@ h1 {
   width: 700px;
   position: relative;
   height: 400px;
-}
+} */
 
 .url-wrapper {
   word-break: break-all;

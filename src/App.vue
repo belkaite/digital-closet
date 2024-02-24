@@ -5,32 +5,31 @@ import { RouterLink, RouterView } from 'vue-router';
 <template>
   <div class="app">
     <div class="intro">
-      <h1>Your digital closet</h1>
     </div>
-    <nav class="navigation container-md">
+    <nav class="navigation">
       <RouterLink
         to="/"
-        class="border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
+        class="mx-2 border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
         >Home</RouterLink
       >
       <RouterLink
         :to="{ name: 'about' }"
-        class="border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
+        class=" mx-2 border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
         >About</RouterLink
       >
       <RouterLink
         :to="{ name: 'wishlist' }"
-        class="border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
+        class="mx-2 border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
         >Wish List</RouterLink
       >
       <RouterLink
         :to="{ name: 'upload' }"
-        class="border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
+        class="mx-2 border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
         >Upload</RouterLink
       >
       <RouterLink
         :to="{ name: 'saved' }"
-        class="border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
+        class="mx-2 border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
         >Saved</RouterLink
       >
     </nav>
@@ -41,7 +40,7 @@ import { RouterLink, RouterView } from 'vue-router';
 <style scoped>
 .navigation {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-end;
 }
 </style>

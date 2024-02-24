@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 
 export const useWishListStore = defineStore('wishlist', () => {
   type WishListItemType = {
@@ -38,9 +38,6 @@ export const useWishListStore = defineStore('wishlist', () => {
     wishList.value.unshift(item);
   };
 
-  const calculateItemsSum = computed(() => {
-    return wishList.value.reduce((sum, item) => sum + Number(item.price), 0);
-  });
 
   const deleteItem = (id: string) => {
     wishList.value = wishList.value.filter((item) => item.id !== id);
@@ -63,7 +60,6 @@ export const useWishListStore = defineStore('wishlist', () => {
   return {
     wishList,
     addItem,
-    calculateItemsSum,
     deleteItem,
     editItem,
     togglePurchaseStatus

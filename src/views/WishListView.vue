@@ -4,7 +4,6 @@ import WishItem from '@/components/WishItem.vue';
 import useWishListStore from '@/stores/wishItemsStore';
 import ItemFilter from '@/components/ItemFilter.vue';
 
-
 const store = useWishListStore();
 const filter = ref('');
 
@@ -35,11 +34,23 @@ const filteredItems = computed(() => {
       return store.wishList;
   }
 });
+
+const calculateItemsSumToPurchase = computed(() => {
+  return store.wishList
+    .filter((item) => !item.isPurchased)
+    .reduce((sum, item) => sum + Number(item.price), 0);
+});
+
+const calculateItemsSumPurchased = computed(() => {
+  return store.wishList
+    .filter((item) => item.isPurchased)
+    .reduce((sum, item) => sum + Number(item.price), 0);
+});
 </script>
 
 <template>
   <div class="create">
-    <h1>WishList</h1>
+    <h1 class="dark:bg-darkBlue dark:text-white">WishList</h1>
     <ItemFilter :filter="filter" @set-filter="setFilter" />
     <div class="form">
       <h3>Add a new item</h3>
@@ -65,16 +76,15 @@ const filteredItems = computed(() => {
     </div>
     <div class="w-5 h-5 bg-amber-200 rounded-full hover:animate-ping"></div>
     <div>
-      <h2>Money to save: {{ store.calculateItemsSum }}</h2>
+      <h2>Money to save: {{ calculateItemsSumToPurchase }}</h2>
+      <h2>Money spent: {{ calculateItemsSumPurchased }}</h2>
     </div>
     <WishItem v-for="item in filteredItems" :key="item.id" :item="item"></WishItem>
   </div>
 </template>
 
 <style>
-h1 {
-  color: black;
-}
+
 
 .form {
   margin-top: 20px;
