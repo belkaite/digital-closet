@@ -4,10 +4,15 @@ import WishItem from '@/components/WishItem.vue';
 import useWishListStore from '@/stores/wishItemsStore';
 import ItemFilter from '@/components/ItemFilter.vue';
 
+
 const store = useWishListStore();
 const filter = ref('');
 
 const newItem = ref({ name: '', price: '', url: '' });
+
+store.$subscribe((_, state) => {
+  localStorage.setItem('wishList', JSON.stringify(state.wishList));
+});
 
 const addItem = () => {
   if (newItem.value.name && newItem.value.price) {
@@ -16,7 +21,7 @@ const addItem = () => {
   }
 };
 
-const setFilter = (value) => {
+const setFilter = (value: string) => {
   filter.value = value;
 };
 
@@ -26,11 +31,10 @@ const filteredItems = computed(() => {
       return store.wishList.filter((item) => !item.isPurchased);
     case 'purchased':
       return store.wishList.filter((item) => item.isPurchased);
-      default:
-        return store.wishList
+    default:
+      return store.wishList;
   }
 });
-
 </script>
 
 <template>
@@ -52,13 +56,14 @@ const filteredItems = computed(() => {
         v-model="newItem.price"
         type="number"
         ref="newItemRef"
-        id="new-item-title"
+        id="new-item-price"
         placeholder="Price..."
       />
       <label for="url">Url:</label>
       <textarea v-model="newItem.url" id="url" placeholder="Url..." />
       <button @click="addItem" :disabled="!newItem" type="button">Add Item</button>
     </div>
+    <div class="w-5 h-5 bg-amber-200 rounded-full hover:animate-ping"></div>
     <div>
       <h2>Money to save: {{ store.calculateItemsSum }}</h2>
     </div>

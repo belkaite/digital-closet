@@ -13,6 +13,17 @@ export const useWishListStore = defineStore('wishlist', () => {
 
   const wishList = ref<WishListItemType[]>([]);
 
+  const error = ref<string | null>(null);
+
+  try {
+    const storedItems = localStorage.getItem('wishList');
+    if (storedItems) {
+      wishList.value = JSON.parse(storedItems);
+    }
+  } catch (err) {
+    error.value = 'Failed to load habits from storage.';
+  }
+
   const addItem = (wishListItem: Omit<WishListItemType, 'id' | 'creationDate'>) => {
     const id = new Date().getTime().toString();
     const creationDate = new Date().toISOString().substring(0, 10);
