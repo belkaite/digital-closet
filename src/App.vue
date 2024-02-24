@@ -4,33 +4,22 @@ import { RouterLink, RouterView } from 'vue-router';
 
 <template>
   <div class="app">
-    <div class="intro">
-    </div>
+    <div class="intro"></div>
     <nav class="navigation">
       <RouterLink
         to="/"
-        class="mx-2 border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
-        >Home</RouterLink
-      >
-      <RouterLink
-        :to="{ name: 'about' }"
-        class=" mx-2 border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
+        class="mx-2 border-b-2 border-transparent hover:border-red-600 hover:text-black transition duration-500"
         >About</RouterLink
       >
       <RouterLink
         :to="{ name: 'wishlist' }"
-        class="mx-2 border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
+        class="mx-2 border-b-2 border-transparent hover:border-red-600 hover:text-black transition duration-500"
         >Wish List</RouterLink
       >
       <RouterLink
-        :to="{ name: 'upload' }"
-        class="mx-2 border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
-        >Upload</RouterLink
-      >
-      <RouterLink
-        :to="{ name: 'saved' }"
-        class="mx-2 border-b-2 border-transparent hover:border-black hover:text-black transition duration-500"
-        >Saved</RouterLink
+        :to="{ name: 'closet' }"
+        class="mx-2 border-b-2 border-transparent hover:border-red-600 hover:text-black transition duration-500"
+        >Closet</RouterLink
       >
     </nav>
     <RouterView />
@@ -42,5 +31,7 @@ import { RouterLink, RouterView } from 'vue-router';
   display: flex;
   flex-direction: row;
   align-items: flex-end;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 </style>
