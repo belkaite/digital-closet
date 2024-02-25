@@ -5,6 +5,7 @@ import PopupModal from '@/components/PopupModal.vue';
 
 const modalActive = ref(false);
 const store = useWishListStore();
+const validationError = ref('');
 
 const props = defineProps({
   item: {
@@ -25,6 +26,20 @@ type WishListItemType = {
 const editableItem = reactive({ ...props.item }) as WishListItemType;
 
 const submitEdit = () => {
+  if (!editableItem.name || !editableItem.price) {
+    validationError.value = 'Name and price are required.';
+    setTimeout(() => {
+      validationError.value = '';
+    }, 3000);
+    return;
+  }
+  if (Number.isNaN(Number(editableItem.price))) {
+    validationError.value = 'Price must be a number.';
+    setTimeout(() => {
+      validationError.value = '';
+    }, 3000);
+    return;
+  }
   store.editItem(editableItem);
   modalActive.value = false;
 };
@@ -98,6 +113,7 @@ const submitEdit = () => {
         <input type="number" id="price" v-model="editableItem.price" />
         <label for="url">Url:</label>
         <input type="text" id="url" v-model="editableItem.url" />
+        <div v-if="validationError" class="text-red-500">{{ validationError }}</div>
         <button
           type="submit"
           class="mx-2 bg-red-800 hover:bg-red-500 text-white py-2 px-4 my-4 border border-gray-400 rounded shadow w-36"
@@ -108,5 +124,3 @@ const submitEdit = () => {
     </div>
   </PopupModal>
 </template>
-
-
