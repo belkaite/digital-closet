@@ -17,6 +17,8 @@ export const useImageStore = defineStore('images', () => {
   const pageToken = ref<string | null>(null);
   const errorMessage = ref<string | null>(null);
   const successMessage = ref<string | null>(null);
+  const hasImages = computed(() => images.value.length > 0);
+
 
   const handleFileSelect = (event: Event) => {
     const input = event.target as HTMLInputElement;
@@ -77,10 +79,16 @@ export const useImageStore = defineStore('images', () => {
         const metadata = { customMetadata: { uploadDate: Date.now().toString() } };
         await uploadBytes(imageRef, selectedFile.value, metadata);
         successMessage.value = 'Upload successful!';
+        setTimeout(() => {
+          successMessage.value = '';
+        }, 3000);
         selectedFile.value = null;
         fetchImages();
       } catch (error) {
         errorMessage.value = `Upload failed: ${error}`;
+        setTimeout(() => {
+          errorMessage.value = '';
+        }, 3000);
       }
     }
   };
@@ -108,7 +116,8 @@ export const useImageStore = defineStore('images', () => {
     handleFileSelect,
     canFetchMore,
     filterAndSortImages,
-    deleteImage
+    deleteImage,
+    hasImages
   };
 });
 

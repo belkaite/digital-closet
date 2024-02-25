@@ -5,13 +5,16 @@ import ImageList from '../components/ImageList.vue'
 
 <template>
   <main>
-    <h1 class="dark:bg-darkBlue dark:text-white">Upload</h1>
+    <h1>Closet / Your digital storage of clothes </h1>
     <UploadImage />
     <br>
     <ImageList :showDelete="true" />
   </main>
 </template>
 
-<style>
-/* This is a single-line comment */
+<style scoped>
+h1 {
+  font-weight: bold;
+  font-size: 25px;
+}
 </style>

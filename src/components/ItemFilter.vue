@@ -26,7 +26,7 @@ const props = defineProps(['filter']);
         type="button"
         v-if="props.filter"
         @click="$emit('set-filter', '')"
-        class="clear mx-2 bg-white hover:bg-gray-100 text-gray-500 py-2 px-4 border border-gray-400 rounded shadow"
+        class="clear mx-2 bg-white hover:bg-gray-100 text-gray-00 py-2 px-4 border border-gray-400 rounded shadow"
       >
         Clear X
       </button>
