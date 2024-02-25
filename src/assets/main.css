@@ -1,4 +1,4 @@
-#app, header {
+#app, header, footer {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -12,6 +12,11 @@
 
 header {
   border-bottom: 2px solid grey; /* Adjust the px value to the desired thickness */
+}
+
+footer {
+  border-top: 2px solid grey;
+  margin-top: 50px;
 }
 
 .fixed-curve {

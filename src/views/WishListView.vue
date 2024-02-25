@@ -58,7 +58,7 @@ const calculateItemsSumPurchased = computed(() => {
     <button
       @click="modalActive = true"
       type="button"
-      class="bg-red-800 hover:bg-red-500 text-white mx-2 my-6 py-4 px-6 border text-5xl border-gray-400 rounded shadow"
+      class="bg-red-800 hover:bg-red-500 text-white mx-2 my-6 py-4 px-8 border text-5xl border-gray-400 rounded shadow"
     >
       +
     </button>
@@ -99,6 +99,7 @@ const calculateItemsSumPurchased = computed(() => {
       </div>
     </div>
     <WishItem v-for="item in filteredItems" :key="item.id" :item="item"></WishItem>
+    <div v-if="filteredItems.length === 0" class="text-center text-red-500">No items have been added here yet.</div>
   </div>
 </template>
 

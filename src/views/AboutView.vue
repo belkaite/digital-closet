@@ -33,7 +33,7 @@ import AccordionItem from '../components/AccordionItem.vue';
             ready to be reimagined and worn in new ways.
             <img src="@/assets/images/folded-clothes.svg" alt="Folded clothes" />
             <br />
-            Coming Soon: Outfit Generator - this exciting feature will allow you to create cool
+            To be added: Outfit Generator - this exciting feature will allow you to create cool
             outfits by dragging and dropping items from your digital closet into a collage. Discover
             new ways to combine your existing wardrobe pieces.
             <img src="@/assets/images/puzzle.svg" alt="Folded clothes" />

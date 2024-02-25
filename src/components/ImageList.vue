@@ -50,7 +50,7 @@ onMounted(store.fetchImages);
     >
       Load more
     </button>
-    <div v-if="!store.hasImages" class="text-red-500">No images have been added yet.</div>
+    <div v-if="!store.hasImages" class=" text-center text-red-500">No images have been added yet.</div>
   </div>
 </template>
 
