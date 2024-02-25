@@ -20,6 +20,10 @@ const router = createRouter({
       path: '/wishlist',
       name: 'wishlist',
       component: WishList
+    },
+    {
+      path: '/:catchAll(.*)*',
+      redirect: { name: 'about' }
     }
   ]
 });
