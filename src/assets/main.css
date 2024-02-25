@@ -10,13 +10,13 @@
   font-size: 50px;
 }
 
-header {
-  border-bottom: 2px solid grey; /* Adjust the px value to the desired thickness */
+h1 {
+  font-size: 25px;
+  font-weight: bold !important;
 }
 
-footer {
-  border-top: 2px solid grey;
-  margin-top: 50px;
+.logo {
+  max-width: 300px;
 }
 
 .fixed-curve {
@@ -24,17 +24,31 @@ footer {
   left: 0;
   right: 0;
   bottom: 0;
-  width: 100vw; /* Full width of the viewport */
-  height: 100vh; /* Full height of the viewport */
-  overflow: hidden; /* Prevents scroll on overflow */
-  z-index: -1; /* Ensures it doesn't overlap content */
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1;
 }
 
 .curve-image {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%; /* Stretch the image to cover the full width */
-  min-height: 100%; /* Minimum height to cover the viewport */
-  object-fit: cover; /* Preserve aspect ratio while filling the element's entire content box */
+  width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+@media (width <= 600px) {
+  .app, header, footer, h1 {
+      font-size: 12px;
+  }
+
+  .main-title {
+    font-size: 20px;
+  }
+
+  .logo { 
+    max-width: 100px;
+  }
 }

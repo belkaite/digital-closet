@@ -36,7 +36,4 @@ const toggle = () => {
   </div>
 </template>
 
-<style>
-/* This is a single-line comment */
-</style>
 

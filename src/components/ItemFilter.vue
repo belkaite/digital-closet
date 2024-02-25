@@ -35,10 +35,6 @@ const props = defineProps(['filter']);
 </template>
 
 <style>
-h3 {
-  font-size: 18px;
-}
-
 .selected {
   color: red;
 }

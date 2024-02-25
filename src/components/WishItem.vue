@@ -109,8 +109,4 @@ const submitEdit = () => {
   </PopupModal>
 </template>
 
-<style scoped>
-h1 {
-  color: black;
-}
-</style>
+

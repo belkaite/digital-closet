@@ -5,8 +5,8 @@ const store = useImageStore();
 </script>
 
 <template>
-  <div>
-    <label class="block mb-2 text-gray-500" for="default_size">Upload Image</label>
+  <div class="my-4">
+    <label class="block mb-2 text-gray-500" for="default_size">Select image from your device:</label>
     <input
       type="file"
       class="block w-full mb-5 text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none file:bg-black file:hover:bg-zinc-400 file:text-white file:py-2 file:px-4 file:border file:border-gray-400 file:rounded file:shadow"
@@ -26,9 +26,4 @@ const store = useImageStore();
   </div>
 </template>
 
-<style scoped>
-h1 {
-  font-weight: bold;
-  font-size: 25px;
-}
-</style>
+

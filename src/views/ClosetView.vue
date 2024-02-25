@@ -12,9 +12,3 @@ import ImageList from '../components/ImageList.vue'
   </main>
 </template>
 
-<style scoped>
-h1 {
-  font-weight: bold;
-  font-size: 25px;
-}
-</style>

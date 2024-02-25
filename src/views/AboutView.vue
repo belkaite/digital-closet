@@ -45,14 +45,17 @@ import AccordionItem from '../components/AccordionItem.vue';
 </template>
 
 <style scoped>
-h1 {
-  font-weight: bold;
-  font-size: 25px;
-}
 
 img {
   width: 200px;
   padding-top: 20px;
   padding-bottom: 20px;
 }
+
+@media (width <= 600px) {
+ img {
+  width: 80px;
+ }
+}
+
 </style>

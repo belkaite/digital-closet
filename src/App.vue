@@ -34,4 +34,12 @@ import { RouterLink, RouterView } from 'vue-router';
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+@media (width <= 600px) {
+  .navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
 </style>

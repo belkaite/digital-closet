@@ -54,11 +54,11 @@ const calculateItemsSumPurchased = computed(() => {
 <template>
   <div class="create">
     <h1>Wish List / Your purchases planner</h1>
-    <ItemFilter :filter="filter" @set-filter="setFilter" class="filter" />
+    <ItemFilter :filter="filter" @set-filter="setFilter" class="filter py-4" />
     <button
       @click="modalActive = true"
       type="button"
-      class="bg-red-800 hover:bg-red-500 text-white mx-2 my-6 py-4 px-8 border text-5xl border-gray-400 rounded shadow"
+      class="bg-red-800 hover:bg-red-500 text-white mx-2 my-6 py-2 px-4 sm:py-3 sm:px-6 text-xl sm:text-5xl border border-gray-400 rounded shadow"
     >
       +
     </button>
@@ -112,13 +112,5 @@ const calculateItemsSumPurchased = computed(() => {
   flex-direction: column;
 }
 
-h1 {
-  font-weight: bold;
-  font-size: 25px;
-}
 
-.filter {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
 </style>
