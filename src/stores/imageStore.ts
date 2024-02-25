@@ -13,12 +13,24 @@ import {
 
 export const useImageStore = defineStore('images', () => {
   const selectedFile = ref<File | null>(null);
-  const images = ref<Array<{ url: string; name: string; uploadDate: number }>>([]);
+  
+  type ImageType = {
+    url: string;
+    name: string;
+    uploadDate: number;
+  };
+  const images = ref<ImageType[]>([]);
   const pageToken = ref<string | null>(null);
   const errorMessage = ref<string | null>(null);
   const successMessage = ref<string | null>(null);
   const hasImages = computed(() => images.value.length > 0);
+  const isLoading = ref<boolean>(false);
 
+  type ImageDetail = {
+    url: string;
+    name: string;
+    uploadDate: number;
+  };
 
   const handleFileSelect = (event: Event) => {
     const input = event.target as HTMLInputElement;
@@ -31,12 +43,6 @@ export const useImageStore = defineStore('images', () => {
         errorMessage.value = 'Invalid file type. Only JPG, JPEG and PNG are accepted.';
       }
     }
-  };
-
-  type ImageDetail = {
-    url: string;
-    name: string;
-    uploadDate: number;
   };
 
   async function fetchImageDetails(itemRef: StorageReference) {
@@ -59,6 +65,7 @@ export const useImageStore = defineStore('images', () => {
   }
 
   const fetchImages = async () => {
+    isLoading.value = true;
     try {
       const imageRef = storageRef(storage, 'images');
       const result = await list(imageRef, { maxResults: 10, pageToken: pageToken.value });
@@ -69,6 +76,8 @@ export const useImageStore = defineStore('images', () => {
       pageToken.value = result.nextPageToken || null;
     } catch (error) {
       errorMessage.value = `Error fetching images: ${error}`;
+    } finally {
+      isLoading.value = false;
     }
   };
 
@@ -117,7 +126,8 @@ export const useImageStore = defineStore('images', () => {
     canFetchMore,
     filterAndSortImages,
     deleteImage,
-    hasImages
+    hasImages,
+    isLoading
   };
 });
 

@@ -12,7 +12,6 @@ export const useWishListStore = defineStore('wishlist', () => {
   };
 
   const wishList = ref<WishListItemType[]>([]);
-
   const error = ref<string | null>(null);
 
   try {

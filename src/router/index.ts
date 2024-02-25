@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Closet from '../views/ClosetView.vue';
-import WishList from '../views/WishListView.vue';
+import Closet from '../views/ClosetView/ClosetView.vue';
+import WishList from '../views/WishListView/WishListView.vue';
 import About from '../views/AboutView.vue';
 
 const router = createRouter({

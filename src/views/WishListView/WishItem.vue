@@ -3,9 +3,9 @@ import { defineProps, ref, reactive } from 'vue';
 import useWishListStore from '@/stores/wishItemsStore';
 import PopupModal from '@/components/PopupModal.vue';
 
-const modalActive = ref(false);
+const modalActive = ref<boolean>(false);
 const store = useWishListStore();
-const validationError = ref('');
+const validationError = ref<string>('');
 
 const props = defineProps({
   item: {
@@ -43,6 +43,7 @@ const submitEdit = () => {
   store.editItem(editableItem);
   modalActive.value = false;
 };
+
 </script>
 
 <template>

@@ -3,7 +3,6 @@
 <template>
   <div class="modal" aria-modal="true" role="dialog" tabindex="-1">
     <div class="inner">
-      <!-- <button type="button" class="close-btn" @click="closePopup">X</button> -->
       <slot></slot>
       <img
         src="@/assets/images/clothing-items.png"

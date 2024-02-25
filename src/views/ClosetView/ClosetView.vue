@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import UploadImage from '../components/UploadImage.vue';
-import ImageList from '../components/ImageList.vue'
+import UploadImage from './UploadImage.vue';
+import ImageList from './ImageList.vue'
 </script>
 
 <template>

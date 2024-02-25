@@ -1,21 +1,23 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import WishItem from '@/components/WishItem.vue';
 import useWishListStore from '@/stores/wishItemsStore';
 import ItemFilter from '@/components/ItemFilter.vue';
 import PopupModal from '@/components/PopupModal.vue';
+import WishItem from './WishItem.vue';
 
 const store = useWishListStore();
-const filter = ref('');
-const modalActive = ref(false);
-const validationError = ref('');
-const isNumeric = (str) => !Number.isNaN(str) && !Number.isNaN(parseFloat(str));
-
+const filter = ref<string>('');
+const modalActive = ref<boolean>(false);
+const validationError = ref<string>('');
 const newItem = ref({ name: '', price: '', url: '' });
+
+const isNumeric = (str: string): boolean => !Number.isNaN(parseFloat(str));
+
 
 store.$subscribe((_, state) => {
   localStorage.setItem('wishList', JSON.stringify(state.wishList));
 });
+
 
 const addItem = () => {
   if (!newItem.value.name || !newItem.value.price) {
