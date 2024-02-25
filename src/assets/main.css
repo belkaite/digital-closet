@@ -1,20 +1,54 @@
-#app {
+#app, header, footer {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   font-weight: normal;
+  font-size: 20px;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsl(160deg 100% 37% / 100%);
-  transition: 0.4s;
-  padding: 3px;
+.main-title {
+  font-size: 50px;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsl(160deg 100% 37% / 20%);
+h1 {
+  font-size: 25px;
+  font-weight: bold !important;
+}
+
+.logo {
+  max-width: 300px;
+}
+
+.fixed-curve {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.curve-image {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+@media (width <= 600px) {
+  .app, header, footer, h1 {
+      font-size: 12px;
+  }
+
+  .main-title {
+    font-size: 20px;
+  }
+
+  .logo { 
+    max-width: 100px;
   }
 }
