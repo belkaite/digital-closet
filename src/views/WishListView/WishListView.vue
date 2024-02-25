@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import useWishListStore from '@/stores/wishItemsStore';
+import useWishListStore from '@/stores/wishItemsStore/wishItemsStore';
 import ItemFilter from '@/components/ItemFilter.vue';
 import PopupModal from '@/components/PopupModal.vue';
 import WishItem from './WishItem.vue';

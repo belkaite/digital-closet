@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineProps, ref, reactive } from 'vue';
-import useWishListStore from '@/stores/wishItemsStore';
+import useWishListStore from '@/stores/wishItemsStore/wishItemsStore';
 import PopupModal from '@/components/PopupModal.vue';
 
 const modalActive = ref<boolean>(false);
