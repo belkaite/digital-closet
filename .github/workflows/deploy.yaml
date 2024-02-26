@@ -45,6 +45,12 @@ jobs:
       ## Unit tests
       - name: Run unit tests
         run: npm run test:unit
+        env:
+          VITE_API_KEY: ${{ secrets.API_KEY }}
+          VITE_AUTH_DOMAIN: ${{ secrets.AUTH_DOMAIN }}
+          VITE_PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          VITE_STORAGE_BUCKET: ${{ secrets.STORAGE_BUCKET }}
+          VITE_APP_ID: ${{ secrets.APP_ID }}
 
       ## Build the source code
       - name: Build
@@ -62,6 +68,12 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run E2E tests
         run: npm run test:e2e
+        env:
+          VITE_API_KEY: ${{ secrets.API_KEY }}
+          VITE_AUTH_DOMAIN: ${{ secrets.AUTH_DOMAIN }}
+          VITE_PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          VITE_STORAGE_BUCKET: ${{ secrets.STORAGE_BUCKET }}
+          VITE_APP_ID: ${{ secrets.APP_ID }}
       - uses: actions/upload-artifact@v3
         if: always()
         with:
