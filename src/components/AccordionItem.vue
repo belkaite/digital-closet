@@ -35,5 +35,3 @@ const toggle = () => {
     </div>
   </div>
 </template>
-
-

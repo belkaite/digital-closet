@@ -1,6 +1,6 @@
 import { it, expect, describe, beforeEach } from 'vitest';
 import { setActivePinia, createPinia } from 'pinia';
-import { useImageStore} from '../imageStore';
+import { useImageStore } from '../imageStore';
 
 describe('filterAndSortImages', () => {
   beforeEach(() => {

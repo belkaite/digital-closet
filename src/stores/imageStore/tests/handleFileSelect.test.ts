@@ -49,5 +49,3 @@ describe('handleFileSelect', () => {
     expect(store.errorMessage).toMatch(/invalid file type/i);
   });
 });
-
-

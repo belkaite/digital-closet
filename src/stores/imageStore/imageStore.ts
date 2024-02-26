@@ -13,7 +13,7 @@ import {
 
 export const useImageStore = defineStore('images', () => {
   const selectedFile = ref<File | null>(null);
-  
+
   type ImageType = {
     url: string;
     name: string;

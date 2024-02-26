@@ -13,11 +13,9 @@ const newItem = ref({ name: '', price: '', url: '' });
 
 const isNumeric = (str: string): boolean => !Number.isNaN(parseFloat(str));
 
-
 store.$subscribe((_, state) => {
   localStorage.setItem('wishList', JSON.stringify(state.wishList));
 });
-
 
 const addItem = () => {
   if (!newItem.value.name || !newItem.value.price) {

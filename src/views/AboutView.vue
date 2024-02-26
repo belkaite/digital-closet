@@ -45,7 +45,6 @@ import AccordionItem from '../components/AccordionItem.vue';
 </template>
 
 <style scoped>
-
 img {
   width: 200px;
   padding-top: 20px;
@@ -53,9 +52,8 @@ img {
 }
 
 @media (width <= 600px) {
- img {
-  width: 80px;
- }
+  img {
+    width: 80px;
+  }
 }
-
 </style>
