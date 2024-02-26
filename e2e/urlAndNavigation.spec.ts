@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:5173/');
+  await page.goto('https://belkaite.github.io/digital-closet/');
 });
 
 test.describe('navigate through menu', () => {
@@ -24,20 +24,20 @@ test.describe('navigate through menu', () => {
   });
 
   test('redirects non existing path to main url', async ({ page }) => {
-    await page.goto('http://localhost:5173/random');
+    await page.goto('https://belkaite.github.io/digital-closet/random');
 
-    await expect(page).toHaveURL('http://localhost:5173/');
+    await expect(page).toHaveURL('https://belkaite.github.io/digital-closet/');
   });
 
   test('redirects to wishlist page', async ({ page }) => {
-    await page.goto('http://localhost:5173/wishlist');
+    await page.goto('https://belkaite.github.io/digital-closet/wishlist');
 
-    await expect(page).toHaveURL('http://localhost:5173/wishlist');
+    await expect(page).toHaveURL('https://belkaite.github.io/digital-closet/wishlist');
   });
 
   test('redirects to closet  page', async ({ page }) => {
-    await page.goto('http://localhost:5173/closet');
+    await page.goto('https://belkaite.github.io/digital-closet/closet');
 
-    await expect(page).toHaveURL('http://localhost:5173/closet');
+    await expect(page).toHaveURL('https://belkaite.github.io/digital-closet/closet');
   });
 });
