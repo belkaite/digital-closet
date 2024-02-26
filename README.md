@@ -1,6 +1,13 @@
-# vite-project
+# Digital Closet
 
-This template should help get you started developing with Vue 3 in Vite.
+An app for which main purpose to be help us make more toughtful, mindful and sustainable decisions for our wardrobe.
+
+
+## Main features
+
+Wish List - purchases planner. It's a CRUD (Create, Read, Update, Delete) section, where user can add new purchases with main information (name, price, link). Mark items, when they are purchased and track how much money was spent or needs to save based on   how many are needed to purchase. 
+
+Closet - digital clothes storage. User is allowed to upload items for their devices and see the list of the uploaded items immediately on a page. For this feature, Firebase was used as a storage. Important note: I'm aware based on good practises such data as firebase api key has to be hidden and treated as a secret. But for this project was made an exception temprorar
 
 ## Recommended IDE Setup
 
