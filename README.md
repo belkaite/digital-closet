@@ -1,78 +1,69 @@
-# Digital Closet
+# Digital Closet △
 
-An app for which main purpose to be help us make more toughtful, mindful and sustainable decisions for our wardrobe.
+An application designed to assist in making thoughtful and sustainable wardrobe choices. This project is written using TypeScript and Vue 3 Composition API.
 
+### App can be checked here:
+
+https://belkaite.github.io/digital-closet/
+
+<img src="./src/assets/images/app-preview.png" height="500">
 
 ## Main features
 
-Wish List - purchases planner. It's a CRUD (Create, Read, Update, Delete) section, where user can add new purchases with main information (name, price, link). Mark items, when they are purchased and track how much money was spent or needs to save based on   how many are needed to purchase. 
+#### Wish List:
 
-Closet - digital clothes storage. User is allowed to upload items for their devices and see the list of the uploaded items immediately on a page. For this feature, Firebase was used as a storage. Important note: I'm aware based on good practises such data as firebase api key has to be hidden and treated as a secret. But for this project was made an exception temprorar
+A CRUD (Create, Read, Update, Delete) feature that acts as a purchase planner. Users can add purchases with key details (name, price, link), mark items as purchased and monitor their spendings and savings.
 
-## Recommended IDE Setup
+#### Closet:
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+A digital wardrobe where users can upload clothing items from their devices and view them instantly on the page. Firebase is used for storage. **Note**: to follow best practices for security, Firebase API keys and other configuration details are hidden, which means the demonstration of the feature could be done during reviews.
 
-## Type Support for `.vue` Imports in TS
+## Future improvements
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+Planned functionalities include:
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+#### Link Preview:
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+Intended for the Wish List section to display a preview of links added next to items. Attempts to implement this with '@ashwamegh/vue-link-preview' faced performance issues without a server (loading takes really long sometimes). This feature is omitted for now, as my current knowledge is limited to front-end development basics.
 
-## Customize configuration
+#### Outfit Generator:
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+A tool to create digital outfit collages by dragging and dropping uploaded images into a four-block grid (to mimic a an outfit collage). Unfortunately, due to time constraints, I was not able to implement this feature right now. I was considering to use such libraries as 'Vue Draggable' or 'HTML Drag and Drop API'.
+
+## Technical dependecies used for this project
+
+- TypeScript
+- Vue Router
+- Pinia for state management
+- Vitest unit testing
+- Playwright for end-to-end testing
+- ESLint, StyleLint, Prettier
+- Firebase
+- Mix of Tailwind and plain css for styling
+
+
 
 ## Project Setup
-
 ```sh
 npm install
 ```
-
-### Compile and Hot-Reload for Development
-
+#### Start Dev Server
 ```sh
 npm run dev
 ```
-
-### Type-Check, Compile and Minify for Production
-
+#### Build for Release
 ```sh
 npm run build
 ```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
+#### Run Unit Tests with Vitest
 ```sh
 npm run test:unit
 ```
-
-### Run End-to-End Tests with [Playwright](https://playwright.dev)
-
+#### Run End-to-End Tests with Playwright
 ```sh
-# Install browsers for the first run
-npx playwright install
-
-# When testing on CI, must build the project first
-npm run build
-
-# Runs the end-to-end tests
 npm run test:e2e
-# Runs the tests only on Chromium
-npm run test:e2e -- --project=chromium
-# Runs the tests of a specific file
-npm run test:e2e -- tests/example.spec.ts
-# Runs the tests in debug mode
-npm run test:e2e -- --debug
 ```
-
-### Lint with [ESLint](https://eslint.org/)
-
+#### Lint with ESLint
 ```sh
 npm run lint
 ```
