@@ -37,7 +37,6 @@ export const useWishListStore = defineStore('wishlist', () => {
     wishList.value.unshift(item);
   };
 
-
   const deleteItem = (id: string) => {
     wishList.value = wishList.value.filter((item) => item.id !== id);
   };

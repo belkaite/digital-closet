@@ -43,7 +43,6 @@ const submitEdit = () => {
   store.editItem(editableItem);
   modalActive.value = false;
 };
-
 </script>
 
 <template>

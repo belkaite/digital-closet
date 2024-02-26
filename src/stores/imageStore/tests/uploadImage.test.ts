@@ -24,7 +24,6 @@ describe('uploadImage', () => {
 
     await store.uploadImage();
 
- 
     expect(uploadBytes).toHaveBeenCalled();
     expect(store.successMessage).toMatch(/success/i);
   });
